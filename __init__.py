@@ -1,7 +1,7 @@
 import time
 from datetime import datetime, timedelta
 from mycroft import MycroftSkill, intent_handler
-from mycroft.util.parse import extract_duration
+from mycroft.util.parse import extract_duration, extract_number
 from mycroft.util.time import now_local
 
 class MyFirstSkill(MycroftSkill):
@@ -48,7 +48,7 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the amount of blocks from the user
         #blocks = self.get_response('blocks.amount.of.blocks')
-        blocks = mycroft.util.parse.extract_number(self.get_response('blocks.amount.of.blocks'))
+        blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
         
         # To convert  blocks to an int, it first needs to be a string. 
         # The variable must be of type int for further use
