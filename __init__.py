@@ -50,6 +50,7 @@ class MyFirstSkill(MycroftSkill):
         #blocks = self.get_response('blocks.amount.of.blocks')
         blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
         while not blocks:
+            self.speak_dialog('skill.blocks.could.not.understand')
             blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
         
         # To convert  blocks to an int, it first needs to be a string. 
