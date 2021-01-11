@@ -30,13 +30,14 @@ class MyFirstSkill(MycroftSkill):
             self.speak_dialog('tasks.moveon')
 
         last_task = self.ask_yesno('tasks.last.task')
+        while last_task != 'yes' and last_task != 'no':
+            self.speak_dialog('skill.last.task.could.not.understand')
+            last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.get_response('tasks.task3')
             tasks.append(task3)
         elif last_task == "no":
             self.speak_dialog('tasks.moveon')
-        else:
-            self.speak_dialog('skill.last.task.could.not.understand')
 
         if len(tasks) == 1:
             number_of_tasks = "1 task"
