@@ -47,12 +47,13 @@ class MyFirstSkill(MycroftSkill):
         self.speak_dialog('tasks.confirmation', data={"number_of_tasks": number_of_tasks})
 
         # Get the amount of blocks from the user
-        blocks = self.get_response('blocks.amount.of.blocks')
+        #blocks = self.get_response('blocks.amount.of.blocks')
+        blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
         
         # To convert  blocks to an int, it first needs to be a string. 
         # The variable must be of type int for further use
-        blocks = str(blocks)
-        blocks = int(blocks)
+       # blocks = str(blocks)
+       # blocks = int(blocks)
         
         # If the user selects one block, Mycroft responds with the singular "block" 
         if blocks == 1:
