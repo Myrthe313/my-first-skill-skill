@@ -49,7 +49,7 @@ class MyFirstSkill(MycroftSkill):
         # Get the amount of blocks from the user
         #blocks = self.get_response('blocks.amount.of.blocks')
         blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
-        while not isinstance(blocks, int):
+        while not blocks:
             blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
         
         # To convert  blocks to an int, it first needs to be a string. 
