@@ -48,10 +48,11 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the amount of blocks from the user
         #blocks = self.get_response('blocks.amount.of.blocks')
-        blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'blocks.amount.of.blocks'))
+        self.speak_dialog('blocks.amount.of.blocks')
+        blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks', 'four blocks', 'five blocks', 'six blocks'], 'blocks.selection'))
         while not blocks:
             self.speak_dialog('skill.blocks.could.not.understand')
-            blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'blocks.amount.of.blocks'))
+            blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks', 'four blocks', 'five blocks', 'six blocks'], 'blocks.selection'))
         
         # To convert  blocks to an int, it first needs to be a string. 
         # The variable must be of type int for further use
