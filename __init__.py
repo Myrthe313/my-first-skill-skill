@@ -21,7 +21,7 @@ class MyFirstSkill(MycroftSkill):
         
         another_task = self.ask_yesno('tasks.another.task')
         while another_task != 'yes' and another_task != 'no':
-            self.speak_dialog('skill.task.could.not.understand.dialog')
+            self.speak_dialog('skill.task.could.not.understand')
             another_task = self.ask_yesno('tasks.another.task')            
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
