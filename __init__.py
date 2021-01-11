@@ -19,7 +19,10 @@ class MyFirstSkill(MycroftSkill):
         task1 = self.get_response('tasks.task1')
         tasks.append(task1)
         
-        another_task = self.ask_yesno('tasks.another.task', num_retries=3)
+        another_task = self.ask_yesno('tasks.another.task')
+        while another_task != 'yes' and another_task != 'no':
+            # speak dialog
+            another_task = self.ask_yesno('tasks.another.task')            
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
             tasks.append(task2)
