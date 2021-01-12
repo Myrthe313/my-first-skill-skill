@@ -1,11 +1,7 @@
 import time
 from datetime import datetime, timedelta
 from mycroft import MycroftSkill, intent_handler
-<<<<<<< HEAD
-from mycroft.util.parse import extract_number
-=======
 from mycroft.util.parse import extract_duration, extract_number
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
 from mycroft.util.time import now_local
 
 class MyFirstSkill(MycroftSkill):
@@ -18,48 +14,29 @@ class MyFirstSkill(MycroftSkill):
         
         # Give a welcome message to the user
         self.speak_dialog('skill.welcome')
-<<<<<<< HEAD
-        
-        # Get the first task the user wants to accomplish
-=======
         participantnumber = self.get_response('skill.participant.number')
         
         # Get the tasks the user wants to accomplish
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
         tasks = []
         task1 = self.get_response('tasks.task1')
         self.speak_dialog('tasks.task1.confirmation', data={"task1": task1})
         tasks.append(task1)
-<<<<<<< HEAD
 
         # Get the second task the user wants to accomplish
         another_task = self.ask_yesno('tasks.another.task')
         while another_task != 'yes' and another_task != 'no':
-            self.speak_dialog('tasks.task.could.not.understand')
-            another_task = self.ask_yesno('tasks.another.task')
-=======
-        
-        another_task = self.ask_yesno('tasks.another.task')
-        while another_task != 'yes' and another_task != 'no':
             self.speak_dialog('skill.task.could.not.understand')
-            another_task = self.ask_yesno('tasks.another.task')            
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
+            another_task = self.ask_yesno('tasks.another.task')
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
             tasks.append(task2)
         elif another_task == "no":
             self.speak_dialog('tasks.moveon')
 
-<<<<<<< HEAD
         # Get the third task the user wants to accomplish
         last_task = self.ask_yesno('tasks.last.task')
         while last_task != 'yes' and last_task != 'no':
-            self.speak_dialog('tasks.task.could.not.understand')
-=======
-        last_task = self.ask_yesno('tasks.last.task')
-        while last_task != 'yes' and last_task != 'no':
             self.speak_dialog('skill.last.task.could.not.understand')
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
             last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.get_response('tasks.task3')
@@ -75,18 +52,6 @@ class MyFirstSkill(MycroftSkill):
         self.speak_dialog('tasks.confirmation', data={"number_of_tasks": number_of_tasks})
 
         # Get the amount of blocks from the user
-<<<<<<< HEAD
-        blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
-        while not blocks:
-            self.speak_dialog('blocks.could.not.understand')
-            blocks = extract_number(self.get_response('blocks.amount.of.blocks'))
-        
-        # To convert  blocks to an int, it first needs to be a string. 
-        # The variable must be of type int for further use
-         # blocks = str(blocks)
-         # blocks = int(blocks)
-        
-=======
         #blocks = self.get_response('blocks.amount.of.blocks')
         self.speak_dialog('blocks.amount.of.blocks')
         blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'blocks.selection'))
@@ -99,8 +64,7 @@ class MyFirstSkill(MycroftSkill):
         # The variable must be of type int for further use
        # blocks = str(blocks)
        # blocks = int(blocks)
-         
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
+
         # If the user selects one block, Mycroft responds with the singular "block" 
         if blocks == 1:
             amount_of_blocks = "1 block"
@@ -139,11 +103,7 @@ class MyFirstSkill(MycroftSkill):
             if i == blocks-1:
                 break
         self.speak_dialog('study.end')
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
     @intent_handler('tasks.change.task.intent')
     def change_task(self, message):
         selection = self.ask_selection(self.tasknames, 'tasks.what.task')
@@ -158,16 +118,7 @@ class MyFirstSkill(MycroftSkill):
 
         if selection == 'task three':
             task3 = self.get_response('tasks.change.task', data={"selection": selection})
-<<<<<<< HEAD
             self.speak_dialog('tasks.task3.confirmation', data={"task3": task3})
-
-
-
-=======
-            self.speak_dialog('tasks.task3.confirmation', data={"task3": task3})    
->>>>>>> 39c6cff0557ce5d17c367e1afb4f9cf06024ba50
-
-
 
 def create_skill():
     return MyFirstSkill()
