@@ -18,6 +18,9 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the participant number from the user
         number = self.get_response('skill.participant.number')
+        return number
+
+        """
 
         # Make sure the participant number from the user is correct
         correct_number = self.ask_yesno('skill.participant.number.confirmation',
@@ -31,6 +34,8 @@ class MyFirstSkill(MycroftSkill):
         elif correct_number == 'no':
             self.speak("Sorry I must have misunderstood you before. Let's try again.")
             self.get_participant_number()
+            
+        """
 
 
     @intent_handler('skill.study.intent')
