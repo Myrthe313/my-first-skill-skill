@@ -50,7 +50,7 @@ class MyFirstSkill(MycroftSkill):
         # Get the amount of blocks from the user
         #blocks = self.get_response('blocks.amount.of.blocks')
         self.speak_dialog('blocks.amount.of.blocks')
-        blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'blocks.selection')) # maybe add a fourth one? as a basic pomodoro is 4
+        blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'blocks.selection'))
         while not blocks:
             self.speak_dialog('skill.blocks.could.not.understand')
             blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'skill.blocks.could.not.understand'))
