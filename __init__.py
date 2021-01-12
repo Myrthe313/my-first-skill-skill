@@ -4,45 +4,73 @@ from mycroft import MycroftSkill, intent_handler
 from mycroft.util.parse import extract_duration, extract_number
 from mycroft.util.time import now_local
 
+
+
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.tasknames = ['task one', 'task two', 'task three']
+        self.blocks = ['one block', 'two blocks', 'three blocks']
+
+    def get_participant_number(self):
+        """This function requests the users participant number. If the user responds with the wrong number
+           the function will recursively call on itself in order to redo the process."""
+
+        # Get the participant number from the user
+        participant_number = self.get_response('skill.participant.number')
+
+        # Make sure the participant number from the user is correct
+        correct_participant_number = self.ask_yesno('skill.participant.number.confirmation', data={"participant_number": number})
+        while correct_participant_number != 'yes' and correct_participant_number != 'no':
+            self.speak("I am sorry but I did not understand you.")
+            correct_participant_number = self.ask_yesno('skill.participant.number.confirmation')
+        if correct_participant_number == 'yes':
+            self.speak("Great, let's move on!")
+            return participant_number
+        elif correct_participant_number == 'no':
+            self.speak("Sorry I must have misunderstood you before. Let's try again.")
+            self.get_participant_number()
+
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
         
         # Give a welcome message to the user
-        self.speak_dialog('skill.welcome')
-        participantnumber = self.get_response('skill.participant.number')
-        
+        self.speak("Welcome to your study session!" +
+                   " I will be your personal assistant and help you during your studies." +
+                   " Before we begin with the study session, we will first need to do some set up.")
+
+        # Get the participant number from the user using the get_participant_number() function
+        participant_number = self.participant_number()
+
         # Get the tasks the user wants to accomplish
         tasks = []
         task1 = self.get_response('tasks.task1')
-        self.speak_dialog('tasks.task1.confirmation', data={"task1": task1})
+        self.speak("You have chosen {} as your first task for this study session.".format(task1) +
+                   " If you want to change the name for task one, say change a task")
         tasks.append(task1)
 
         # Get the second task the user wants to accomplish
         another_task = self.ask_yesno('tasks.another.task')
         while another_task != 'yes' and another_task != 'no':
-            self.speak_dialog('skill.task.could.not.understand')
+            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
             another_task = self.ask_yesno('tasks.another.task')
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
             tasks.append(task2)
         elif another_task == "no":
-            self.speak_dialog('tasks.moveon')
+            self.speak("Ok let's move on.")
 
         # Get the third task the user wants to accomplish
         last_task = self.ask_yesno('tasks.last.task')
         while last_task != 'yes' and last_task != 'no':
-            self.speak_dialog('skill.last.task.could.not.understand')
+            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
             last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.get_response('tasks.task3')
             tasks.append(task3)
         elif last_task == "no":
-            self.speak_dialog('tasks.moveon')
+            self.speak("Ok let's move on.")
 
         if len(tasks) == 1:
             number_of_tasks = "1 task"
@@ -53,17 +81,15 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the amount of blocks from the user
         #blocks = self.get_response('blocks.amount.of.blocks')
-        self.speak_dialog('blocks.amount.of.blocks')
-        blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'blocks.selection'))
+        self.speak_dialog("Now that I know the tasks you want to accomplish, let's decide how long you want to study." +
+                          " Each block will last 25 minutes and every break is 5 minutes." +
+                          " How many blocks do you want to study?")
+        blocks = extract_number(self.ask_selection(self.blocks, 'blocks.selection'))
         while not blocks:
-            self.speak_dialog('skill.blocks.could.not.understand')
-            blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'skill.blocks.could.not.understand'))
-           
-        
-        # To convert  blocks to an int, it first needs to be a string. 
-        # The variable must be of type int for further use
-       # blocks = str(blocks)
-       # blocks = int(blocks)
+            self.speak("Sorry, I could not understand you." +
+                       " Do you want to study one block, two blocks or three blocks?" +
+                       " Please respond by choosing one of the options.")
+            blocks = extract_number(self.ask_selection(self.blocks, 'skill.blocks.could.not.understand'))
 
         # If the user selects one block, Mycroft responds with the singular "block" 
         if blocks == 1:
@@ -97,12 +123,28 @@ class MyFirstSkill(MycroftSkill):
         for i in range(blocks):
             time.sleep(25)
             if i <  blocks-1:
-                self.speak_dialog('study.break.begin')
+                self.speak("It's time for a 5 minute break")
                 time.sleep(5)
-                self.speak_dialog('study.break.end')
+                self.speak_dialog("Ok, break time is over. Get back to work.")
             if i == blocks-1:
                 break
-        self.speak_dialog('study.end')
+        self.speak("You have finished your studying session." +
+                   " Let's see what tasks you were able to accomplish during your studying session.")
+
+        # Ask about completion of tasks
+
+        for i in range(len(tasks)):
+
+            task = tasks[i]
+            task_number = i + 1
+            completed_task = self.ask_yesno('tasks.completed.task', data={"task": task,
+                                                                          "task_number": task_number})
+            while completed_task != 'yes' and completed_task != 'no':
+                self.speak("I am sorry but I did not understand you. Please respond with yes or no.")
+            if completed_task == 'yes':
+                self.speak("Great job!")
+            elif completed_task == 'no':
+                self.speak("I am very disappointed, please consider another studying session.")
 
     @intent_handler('tasks.change.task.intent')
     def change_task(self, message):
