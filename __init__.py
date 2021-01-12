@@ -13,6 +13,7 @@ class MyFirstSkill(MycroftSkill):
         
         # Give a welcome message to the user
         self.speak_dialog('skill.welcome')
+        participantnumber = self.get_response('skill.participant.number')
         
         # Get the tasks the user wants to accomplish
         tasks = []
