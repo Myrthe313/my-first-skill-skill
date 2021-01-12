@@ -17,18 +17,18 @@ class MyFirstSkill(MycroftSkill):
            the function will recursively call on itself in order to redo the process."""
 
         # Get the participant number from the user
-        participant_number = self.get_response('skill.participant.number')
+        number = self.get_response('skill.participant.number')
 
         # Make sure the participant number from the user is correct
-        correct_participant_number = self.ask_yesno('skill.participant.number.confirmation',
-                                                    data={"participant_number": participant_number})
-        while correct_participant_number != 'yes' and correct_participant_number != 'no':
+        correct_number = self.ask_yesno('skill.participant.number.confirmation',
+                                                    data={"participant_number": number})
+        while correct_number != 'yes' and correct_number != 'no':
             self.speak("I am sorry but I did not understand you.")
-            correct_participant_number = self.ask_yesno('skill.participant.number.confirmation')
-        if correct_participant_number == 'yes':
+            correct_number = self.ask_yesno('skill.participant.number.confirmation')
+        if correct_number == 'yes':
             self.speak("Great, let's move on!")
-            return participant_number
-        elif correct_participant_number == 'no':
+            return number
+        elif correct_number == 'no':
             self.speak("Sorry I must have misunderstood you before. Let's try again.")
             self.get_participant_number()
 
