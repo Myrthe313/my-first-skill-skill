@@ -13,7 +13,7 @@ class MyFirstSkill(MycroftSkill):
         self.blocks = ['one block', 'two blocks', 'three blocks']
 
     def get_participant_number(self):
-        """This function requests the users participant number. If the user responds with the wrong number
+        """This function requests the user's participant number. If the user responds with the wrong number
            the function will recursively call on itself in order to redo the process."""
 
         # Get the participant number from the user
@@ -41,7 +41,7 @@ class MyFirstSkill(MycroftSkill):
                    " Before we begin with the study session, we will first need to do some set up.")
 
         # Get the participant number from the user using the get_participant_number() function
-        participant_number = self.participant_number()
+        participant_number = self.get_participant_number()
 
         # Get the tasks the user wants to accomplish
         tasks = []
