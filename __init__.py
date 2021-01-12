@@ -12,7 +12,7 @@ class MyFirstSkill(MycroftSkill):
         self.tasknames = ['task one', 'task two', 'task three']
         self.blocks = ['one block', 'two blocks', 'three blocks']
 
-    def get_participant_number(self):
+    def get_participant_number(self, message):
         """This function requests the user's participant number. If the user responds with the wrong number
            the function will recursively call on itself in order to redo the process."""
 
