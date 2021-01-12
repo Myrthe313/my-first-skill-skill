@@ -53,6 +53,7 @@ class MyFirstSkill(MycroftSkill):
         while not blocks:
             self.speak_dialog('skill.blocks.could.not.understand')
             blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'blocks.selection'))
+            # the list works qute good, the only thing is that you need to say the word blocks. (so three blocks instead of just three)
         
         # To convert  blocks to an int, it first needs to be a string. 
         # The variable must be of type int for further use
