@@ -5,29 +5,6 @@ from mycroft.util.parse import extract_duration, extract_number
 from mycroft.util.time import now_local
 
 
-def get_participant_number():
-    """This function requests the user's participant number. If the user responds with the wrong number
-       the function will recursively call on itself in order to redo the process."""
-
-    # Get the participant number from the user
-    number = self.get_response('skill.participant.number')
-
-    # Make sure the participant number from the user is correct
-    correct_number = self.ask_yesno('skill.participant.number.confirmation',
-                                    data={"participant_number": number})
-
-    while correct_number != 'yes' and correct_number != 'no':
-        self.speak("I am sorry but I did not understand you.")
-        correct_number = self.ask_yesno('skill.participant.number.confirmation')
-    if correct_number == 'yes':
-        self.speak("Great, let's move on!")
-        return number
-    elif correct_number == 'no':
-        self.speak("Sorry I must have misunderstood you before. Let's try again.")
-        self.get_participant_number()
-
-
-
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
