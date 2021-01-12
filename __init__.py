@@ -42,7 +42,7 @@ class MyFirstSkill(MycroftSkill):
                    " Before we begin with the study session, we will first need to do some set up.")
 
         # Get the participant number from the user using the get_participant_number() function
-        participant_number = self.get_participant_number()
+        self.participant_number = self.get_participant_number()
 
         # Get the tasks the user wants to accomplish
         tasks = []
