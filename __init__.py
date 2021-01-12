@@ -20,7 +20,8 @@ class MyFirstSkill(MycroftSkill):
         participant_number = self.get_response('skill.participant.number')
 
         # Make sure the participant number from the user is correct
-        correct_participant_number = self.ask_yesno('skill.participant.number.confirmation', data={"participant_number": number})
+        correct_participant_number = self.ask_yesno('skill.participant.number.confirmation',
+                                                    data={"participant_number": participant_number})
         while correct_participant_number != 'yes' and correct_participant_number != 'no':
             self.speak("I am sorry but I did not understand you.")
             correct_participant_number = self.ask_yesno('skill.participant.number.confirmation')
