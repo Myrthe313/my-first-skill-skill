@@ -6,37 +6,37 @@ from mycroft.util.time import now_local
 
 
 
+
+
+
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.tasknames = ['task one', 'task two', 'task three']
         self.blocks = ['one block', 'two blocks', 'three blocks']
-        self.participant_number = 999
+        self.participant_number = "999"
 
-    def get_participant_number(self, message):
+    def get_participant_number(self):
         """This function requests the user's participant number. If the user responds with the wrong number
            the function will recursively call on itself in order to redo the process."""
 
         # Get the participant number from the user
-        self.participant_number = self.get_response('skill.participant.number')
-        return self.participant_number
-
-        """
+        number = self.get_response('skill.participant.number')
 
         # Make sure the participant number from the user is correct
         correct_number = self.ask_yesno('skill.participant.number.confirmation',
-                                        data={"participant_number": self.participant_number})
+                                        data={"participant_number": number})
+
         while correct_number != 'yes' and correct_number != 'no':
             self.speak("I am sorry but I did not understand you.")
             correct_number = self.ask_yesno('skill.participant.number.confirmation')
         if correct_number == 'yes':
             self.speak("Great, let's move on!")
-            return self.participant_number
+            return number
         elif correct_number == 'no':
             self.speak("Sorry I must have misunderstood you before. Let's try again.")
             self.get_participant_number()
-            
-        """
+
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
