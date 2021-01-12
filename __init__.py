@@ -52,7 +52,7 @@ class MyFirstSkill(MycroftSkill):
         blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'blocks.selection')) # maybe add a fourth one? as a basic pomodoro is 4
         while not blocks:
             self.speak_dialog('skill.blocks.could.not.understand')
-            blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'blocks.selection'))
+            blocks = extract_number(self.ask_selection(['one blocks', 'two blocks', 'three blocks'], 'skill.blocks.could.not.understand'))
             # the list works qute good, the only thing is that you need to say the word blocks. (so three blocks instead of just three)
         
         # To convert  blocks to an int, it first needs to be a string. 
