@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from mycroft import MycroftSkill, intent_handler
 from mycroft.util.parse import extract_duration, extract_number
 from mycroft.util.time import now_local
+from mycroft.util import LOG
 
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
