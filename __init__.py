@@ -48,7 +48,6 @@ class MyFirstSkill(MycroftSkill):
             self.speak("I must have misunderstood you, let's try again.")
             self.create_a_task(dialog_file, task_ordinal)
         elif confirmation == 'yes':
-            self.speak("Okay let's move on.")
             return task
 
     def get_tasks(self):
@@ -74,7 +73,7 @@ class MyFirstSkill(MycroftSkill):
             self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
             last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
-            task3 = self.create_a_task('tasks.task3')
+            task3 = self.create_a_task('tasks.task3', "third")
             self.tasks.append(task3)
         elif last_task == "no":
             self.speak("Ok let's move on.")
