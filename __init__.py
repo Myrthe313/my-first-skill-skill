@@ -52,8 +52,9 @@ class MyFirstSkill(MycroftSkill):
 
     def get_tasks(self):
 
+        tasks = []
         task1 = self.create_a_task('tasks.task1', "first")
-        self.tasks.append(task1)
+        tasks.append(task1)
 
         # Get the second task the user wants to accomplish
         another_task = self.ask_yesno('tasks.another.task')
@@ -62,10 +63,10 @@ class MyFirstSkill(MycroftSkill):
             another_task = self.ask_yesno('tasks.another.task')
         if another_task == "yes":
             task2 = self.create_a_task('tasks.task2', "second")
-            self.tasks.append(task2)
+            tasks.append(task2)
         elif another_task == "no":
             self.speak("Ok let's move on.")
-            return self.tasks
+            return tasks
 
         # Get the third task the user wants to accomplish
         last_task = self.ask_yesno('tasks.last.task')
@@ -74,10 +75,11 @@ class MyFirstSkill(MycroftSkill):
             last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.create_a_task('tasks.task3', "third")
-            self.tasks.append(task3)
+            tasks.append(task3)
+            return tasks
         elif last_task == "no":
             self.speak("Ok let's move on.")
-            return self.tasks
+            return tasks
 
     def completion_of_tasks(self, tasks):
 
@@ -165,6 +167,7 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the tasks the user wants to accomplish
         self.tasks = self.get_tasks()
+        print(self.tasks)
 
         self.speak("Now that I know the tasks you want to accomplish, let's decide how long you want to study.")
 
