@@ -9,7 +9,7 @@ class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.task_names = ['task one', 'task two', 'task three']
-        self.blocks = ['one block', 'two blocks', 'three blocks']
+        self.block_names = ['one block', 'two blocks', 'three blocks']
         self.participant_number = None
         self.tasks = []
         self.blocks = None
@@ -95,7 +95,7 @@ class MyFirstSkill(MycroftSkill):
             elif completed_task == 'no':
                 self.speak("I am very disappointed, please consider another studying session.")
 
-    def get_blocks(self):
+    def get_blocks(self, block_names):
 
         self.speak("In this study session, we will make use of the pomodoro technique." +
                    " During the session you will have study blocks of 25 minutes with " +
@@ -170,7 +170,7 @@ class MyFirstSkill(MycroftSkill):
         self.speak("Now that I know the tasks you want to accomplish, let's decide how long you want to study.")
 
         # Get the amount of blocks from the user
-        self.blocks = self.get_blocks()
+        self.blocks = self.get_blocks(self.block_names)
 
         # Confirm the total study time of the session
         self.blocks_confirmation(self.blocks)
