@@ -15,6 +15,7 @@ class MyFirstSkill(MycroftSkill):
         
         # Give a welcome message to the user
         self.speak_dialog('skill.welcome')
+        LOG.info("This is a logged info level message outside of the MycroftSkill class scope")
         participantnumber = self.get_response('skill.participant.number')
         
         # Get the tasks the user wants to accomplish
