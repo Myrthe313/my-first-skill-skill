@@ -110,8 +110,7 @@ class MyFirstSkill(MycroftSkill):
         blocks = extract_number(self.ask_selection(block_names, 'blocks.selection'))
         while not blocks:
             self.speak("Sorry, I could not understand you." +
-                       " Do you want to study one block, two blocks or three blocks?" +
-                       " Please respond by choosing one of the options.")
+                       " Do you want to study for one block, two blocks or three blocks?")
             blocks = extract_number(self.ask_selection(block_names, 'skill.blocks.could.not.understand'))
 
         return blocks
@@ -190,7 +189,7 @@ class MyFirstSkill(MycroftSkill):
         self.completion_of_tasks(self.tasks)
 
         # End of study session
-        self.speak("This is the end your study session.")
+        self.speak("This is the end of your study session.")
 
 def create_skill():
     return MyFirstSkill()
