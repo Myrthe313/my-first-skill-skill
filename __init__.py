@@ -30,7 +30,7 @@ class MyFirstSkill(MycroftSkill):
             correct_number = self.ask_yesno('skill.participant.number.confirmation')
         if correct_number == 'no':
             self.speak("Sorry I must have misunderstood you. Let's try again.")
-            self.get_participant_number()
+            return self.get_participant_number()
         elif correct_number == 'yes':
             self.speak("Great, let's move on!")
             return self.participant_number
@@ -46,11 +46,14 @@ class MyFirstSkill(MycroftSkill):
             confirmation = self.ask_yesno('tasks.confirmation', data={"task": task, "task_ordinal": task_ordinal})
         if confirmation == 'no':
             self.speak("I must have misunderstood you, let's try again.")
-            self.create_a_task(dialog_file, task_ordinal)
+            return self.create_a_task(dialog_file, task_ordinal)
         elif confirmation == 'yes':
             return task
 
     def get_tasks(self):
+
+        self.speak("In order to make this study session more productive " +
+                   "I would like to know the tasks you want to accomplish.")
 
         tasks = []
         task1 = self.create_a_task('tasks.task1', "first")
@@ -164,6 +167,7 @@ class MyFirstSkill(MycroftSkill):
 
         # Get the participant number from the user using the get_participant_number() function
         self.participant_number = self.get_participant_number()
+        print(self.participant_number)
 
         # Get the tasks the user wants to accomplish
         self.tasks = self.get_tasks()
