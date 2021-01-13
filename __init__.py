@@ -183,5 +183,8 @@ class MyFirstSkill(MycroftSkill):
         # Ask about completion of tasks
         self.completion_of_tasks(self.tasks)
 
+        # End of study session
+        self.speak("This is the end your study session.")
+
 def create_skill():
     return MyFirstSkill()
