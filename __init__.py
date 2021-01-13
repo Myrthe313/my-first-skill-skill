@@ -7,10 +7,7 @@ from mycroft.util.time import now_local
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-<<<<<<< HEAD
-=======
         self.tasknames = ['task one', 'task two', 'task three']
->>>>>>> 0eb1805a992f797613cb96773c80c67b32e82125
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
@@ -22,19 +19,15 @@ class MyFirstSkill(MycroftSkill):
         # Get the tasks the user wants to accomplish
         tasks = []
         task1 = self.get_response('tasks.task1')
-<<<<<<< HEAD
-=======
+
         self.speak_dialog('tasks.task1.confirmation', data={"task1": task1})
->>>>>>> 0eb1805a992f797613cb96773c80c67b32e82125
+
         tasks.append(task1)
         
         another_task = self.ask_yesno('tasks.another.task')
         while another_task != 'yes' and another_task != 'no':
-<<<<<<< HEAD
             self.speak_dialog('skill.task.could.not.understand')
-=======
-            self.speak('I am sorry but I did not understand you. Please answer with yes or no.')
->>>>>>> 0eb1805a992f797613cb96773c80c67b32e82125
+
             another_task = self.ask_yesno('tasks.another.task')            
         if another_task == "yes":
             task2 = self.get_response('tasks.task2')
@@ -60,28 +53,14 @@ class MyFirstSkill(MycroftSkill):
         self.speak_dialog('tasks.confirmation', data={"number_of_tasks": number_of_tasks})
 
         # Get the amount of blocks from the user
-<<<<<<< HEAD
-        #blocks = self.get_response('blocks.amount.of.blocks')
-=======
         # a selection is used, to minimize pronunciation errors. This way, the answer is compared to the options and the option that matches the answer the most is chosen.
         # For example, if mycroft thinks a user says 'free brooks', he will pick three blocks as answer.
 
->>>>>>> 0eb1805a992f797613cb96773c80c67b32e82125
         self.speak_dialog('blocks.amount.of.blocks')
         blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'blocks.selection'))
         while not blocks:
             self.speak_dialog('skill.blocks.could.not.understand')
             blocks = extract_number(self.ask_selection(['one block', 'two blocks', 'three blocks'], 'skill.blocks.could.not.understand'))
-<<<<<<< HEAD
-           
-        
-        # To convert  blocks to an int, it first needs to be a string. 
-        # The variable must be of type int for further use
-       # blocks = str(blocks)
-       # blocks = int(blocks)
-=======
-
->>>>>>> 0eb1805a992f797613cb96773c80c67b32e82125
          
         # If the user selects one block, Mycroft responds with the singular "block" 
         if blocks == 1:
@@ -121,8 +100,6 @@ class MyFirstSkill(MycroftSkill):
             if i == blocks-1:
                 break
         self.speak_dialog('study.end')
-<<<<<<< HEAD
-=======
         
     @intent_handler('tasks.change.task.intent')
     def change_task(self, message):
@@ -139,8 +116,6 @@ class MyFirstSkill(MycroftSkill):
         if selection == 'task three':
             task3 = self.get_response('tasks.change.task', data={"selection": selection})
             self.speak_dialog('tasks.task3.confirmation', data={"task3": task3})    
->>>>>>> 0eb1805a992f797613cb96773c80c67b32e82125
-
 
 
 def create_skill():
