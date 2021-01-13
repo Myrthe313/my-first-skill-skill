@@ -100,12 +100,12 @@ class MyFirstSkill(MycroftSkill):
                    " During the session you will have study blocks of 25 minutes with " +
                    "a break of 5 minutes between blocks." +
                    " For this session, do you want to study for:")
-        blocks = extract_number(self.ask_selection(self.blocks, 'blocks.selection'))
+        blocks = extract_number(self.ask_selection(block_names, 'blocks.selection'))
         while not blocks:
             self.speak("Sorry, I could not understand you." +
                        " Do you want to study one block, two blocks or three blocks?" +
                        " Please respond by choosing one of the options.")
-            blocks = extract_number(self.ask_selection(self.blocks, 'skill.blocks.could.not.understand'))
+            blocks = extract_number(self.ask_selection(block_names, 'skill.blocks.could.not.understand'))
 
         return blocks
 
