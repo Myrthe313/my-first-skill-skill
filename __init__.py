@@ -29,7 +29,7 @@ class MyFirstSkill(MycroftSkill):
             self.speak("I am sorry but I did not understand you.")
             correct_number = self.ask_yesno('skill.participant.number.confirmation')
         if correct_number == 'no':
-            self.speak("Sorry I must have misunderstood you before. Let's try again.")
+            self.speak("Sorry I must have misunderstood you. Let's try again.")
             self.get_participant_number()
         elif correct_number == 'yes':
             self.speak("Great, let's move on!")
@@ -48,7 +48,7 @@ class MyFirstSkill(MycroftSkill):
             self.speak("I must have misunderstood you, let's try again.")
             self.create_a_task(dialog_file, task_ordinal)
         elif confirmation == 'yes':
-            self.speak("Ok let's move one.")
+            self.speak("Okay let's move on.")
             return task
 
     def get_tasks(self):
@@ -147,7 +147,7 @@ class MyFirstSkill(MycroftSkill):
             if i < blocks - 1:
                 self.speak("It's time for a 5 minute break")
                 time.sleep(5)
-                self.speak_dialog("Ok, break time is over. Get back to work.")
+                self.speak_dialog("Break time is over. Get back to work.")
             if i == blocks - 1:
                 break
         self.speak("You have finished your studying session." +
