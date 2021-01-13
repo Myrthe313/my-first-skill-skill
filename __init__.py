@@ -8,9 +8,10 @@ from mycroft.util.time import now_local
 class MyFirstSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-        self.tasknames = ['task one', 'task two', 'task three']
+        self.task_names = ['task one', 'task two', 'task three']
         self.blocks = ['one block', 'two blocks', 'three blocks']
         self.participant_number = None
+        self.tasks = []
 
     def get_participant_number(self):
         """This function requests the user's participant number. If the user responds with the wrong number
@@ -26,12 +27,57 @@ class MyFirstSkill(MycroftSkill):
         while correct_number != 'yes' and correct_number != 'no':
             self.speak("I am sorry but I did not understand you.")
             correct_number = self.ask_yesno('skill.participant.number.confirmation')
-        if correct_number == 'yes':
-            self.speak("Great, let's move on!")
-            return self.participant_number
-        elif correct_number == 'no':
+        if correct_number == 'no':
             self.speak("Sorry I must have misunderstood you before. Let's try again.")
             self.get_participant_number()
+        elif correct_number == 'yes':
+            self.speak("Great, let's move on!")
+            return self.participant_number
+
+    def create_a_task(self, dialog_file, task_ordinal):
+
+        task = self.get_response(dialog_file)
+        self.speak("You have chosen {} as your {} task for this study session.".format(task, task_ordinal))
+
+        confirmation = self.ask_yesno('tasks.confirmation', data={"task": task, "task_ordinal": task_ordinal})
+        while confirmation != 'yes' and confirmation != 'no':
+            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
+            confirmation = self.ask_yesno('tasks.confirmation', data={"task": task, "task_ordinal": task_ordinal})
+        if confirmation == 'no':
+            self.speak("I must have misunderstood you, let's try again.")
+            self.create_a_task(dialog_file, task_ordinal)
+        elif confirmation == 'yes':
+            self.speak("Ok let's move one.")
+            return task
+
+    def get_tasks(self):
+
+        task1 = self.create_a_task('tasks.task1', "first")
+        self.tasks.append(task1)
+
+        # Get the second task the user wants to accomplish
+        another_task = self.ask_yesno('tasks.another.task')
+        while another_task != 'yes' and another_task != 'no':
+            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
+            another_task = self.ask_yesno('tasks.another.task')
+        if another_task == "yes":
+            task2 = self.create_a_task('tasks.task2', "second")
+            self.tasks.append(task2)
+        elif another_task == "no":
+            self.speak("Ok let's move on.")
+            return self.tasks
+
+        # Get the third task the user wants to accomplish
+        last_task = self.ask_yesno('tasks.last.task')
+        while last_task != 'yes' and last_task != 'no':
+            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
+            last_task = self.ask_yesno('tasks.last.task')
+        if last_task == "yes":
+            task3 = self.create_a_task('tasks.task3')
+            self.tasks.append(task3)
+        elif last_task == "no":
+            self.speak("Ok let's move on.")
+            return self.tasks
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
@@ -45,40 +91,7 @@ class MyFirstSkill(MycroftSkill):
         self.participant_number = self.get_participant_number()
 
         # Get the tasks the user wants to accomplish
-        tasks = []
-        task1 = self.get_response('tasks.task1')
-        self.speak("You have chosen {} as your first task for this study session.".format(task1) +
-                   " If you want to change the name for task one, say change a task")
-        tasks.append(task1)
-
-        # Get the second task the user wants to accomplish
-        another_task = self.ask_yesno('tasks.another.task')
-        while another_task != 'yes' and another_task != 'no':
-            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
-            another_task = self.ask_yesno('tasks.another.task')
-        if another_task == "yes":
-            task2 = self.get_response('tasks.task2')
-            tasks.append(task2)
-        elif another_task == "no":
-            self.speak("Ok let's move on.")
-
-        # Get the third task the user wants to accomplish
-        last_task = self.ask_yesno('tasks.last.task')
-        while last_task != 'yes' and last_task != 'no':
-            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
-            last_task = self.ask_yesno('tasks.last.task')
-        if last_task == "yes":
-            task3 = self.get_response('tasks.task3')
-            tasks.append(task3)
-        elif last_task == "no":
-            self.speak("Ok let's move on.")
-
-        if len(tasks) == 1:
-            number_of_tasks = "1 task"
-        if len(tasks) > 1:
-            number_of_tasks = "{} tasks".format(len(tasks))
-
-        self.speak_dialog('tasks.confirmation', data={"number_of_tasks": number_of_tasks})
+        self.tasks = self.get_tasks()
 
         # Get the amount of blocks from the user
         #blocks = self.get_response('blocks.amount.of.blocks')
@@ -149,7 +162,7 @@ class MyFirstSkill(MycroftSkill):
 
     @intent_handler('tasks.change.task.intent')
     def change_task(self, message):
-        selection = self.ask_selection(self.tasknames, 'tasks.what.task')
+        selection = self.ask_selection(self.task_names, 'tasks.what.task')
 
         if selection == 'task one':
             task1 = self.get_response('tasks.change.task', data={"selection": selection})
