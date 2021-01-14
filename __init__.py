@@ -25,6 +25,9 @@ class MyFirstSkill(MycroftSkill):
         correct_number = self.ask_yesno('skill.participant.number.confirmation',
                                         data={"participant_number": self.participant_number})
 
+        with open('log.txt', 'a') as f:
+            f.write(str(correct_number))
+            
         while correct_number != 'yes' and correct_number != 'no':
             self.speak("I am sorry but I did not understand you.")
             correct_number = self.ask_yesno('skill.participant.number.confirmation')
