@@ -104,9 +104,9 @@ class MyFirstSkill(MycroftSkill):
     def get_blocks(self, block_names):
 
         self.speak("In this study session, we will make use of the pomodoro technique." +
-                   " During the session you will have study blocks of 25 minutes with " +
+                   "During the session you will have study blocks of 25 minutes with " +
                    "a break of 5 minutes between blocks." +
-                   " For this session, do you want to study for:")
+                   "For this session, do you want to study for:")
         blocks = extract_number(self.ask_selection(block_names, 'blocks.selection'))
         while not blocks:
             self.speak("Sorry, I could not understand you." +
