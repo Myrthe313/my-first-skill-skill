@@ -111,7 +111,7 @@ class MyFirstSkill(MycroftSkill):
         while not blocks:
             self.speak("Sorry, I could not understand you." +
                        " Do you want to study for one block, two blocks or three blocks?")
-            blocks = extract_number(self.ask_selection(block_names, 'skill.blocks.could.not.understand'))
+            blocks = extract_number(self.ask_selection(block_names, 'blocks.selection'))
 
         return blocks
 
