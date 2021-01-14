@@ -52,7 +52,7 @@ class MyFirstSkill(MycroftSkill):
 
     def get_tasks(self):
 
-        self.speak("In order to make this study session more productive " +
+        self.speak("In order to make this session more productive and for me to be more helpful " +
                    "I would like to know the tasks you want to accomplish.")
 
         tasks = []
@@ -68,7 +68,7 @@ class MyFirstSkill(MycroftSkill):
             task2 = self.create_a_task('tasks.task2', "second")
             tasks.append(task2)
         elif another_task == "no":
-            self.speak("Ok let's move on.")
+            self.speak("That is okay, we will now move on to setting up your pomodoro session.")
             return tasks
 
         # Get the third task the user wants to accomplish
@@ -81,7 +81,7 @@ class MyFirstSkill(MycroftSkill):
             tasks.append(task3)
             return tasks
         elif last_task == "no":
-            self.speak("Ok let's move on.")
+            self.speak("That is okay, we will now move on to setting up your pomodoro session.")
             return tasks
 
     def completion_of_tasks(self, tasks):
@@ -99,7 +99,7 @@ class MyFirstSkill(MycroftSkill):
             if completed_task == 'yes':
                 self.speak("Great job!")
             elif completed_task == 'no':
-                self.speak("I am very disappointed, please consider another studying session.")
+                self.speak("That is okay, you can always consider another studying session.")
 
     def get_blocks(self, block_names):
 
@@ -150,13 +150,13 @@ class MyFirstSkill(MycroftSkill):
         for i in range(blocks):
             time.sleep(25)
             if i < blocks - 1:
-                self.speak("It's time for a 5 minute break")
+                self.speak("You have been busy for quite some time now. Let’s take a well deserved 5 minute break, enjoy!")
                 time.sleep(5)
-                self.speak_dialog("Break time is over. Get back to work.")
+                self.speak_dialog("Your break is over, hopefully you enjoyed and are now refreshed to start studying again.")
             if i == blocks - 1:
                 break
-        self.speak("You have finished your studying session." +
-                   " Let's see what tasks you were able to accomplish during your studying session.")
+        self.speak("You have finished your studying session. Well done!" +
+                   "Let's see what tasks you were able to accomplish during your studying session.")
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
@@ -175,7 +175,7 @@ class MyFirstSkill(MycroftSkill):
         self.tasks = self.get_tasks()
         print(self.tasks)
 
-        self.speak("Now that I know the tasks you want to accomplish, let's decide how long you want to study.")
+        self.speak("Now that I know the tasks you want to accomplish, let's decide how long you are willing to study.")
 
         # Get the amount of blocks from the user
         self.blocks = self.get_blocks(self.block_names)
@@ -190,7 +190,7 @@ class MyFirstSkill(MycroftSkill):
         self.completion_of_tasks(self.tasks)
 
         # End of study session
-        self.speak("This is the end of your study session.")
+        self.speak("This is the end of your study session. You did a great job! Enjoy your time off!")
 
 def create_skill():
     return MyFirstSkill()
