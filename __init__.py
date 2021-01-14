@@ -162,8 +162,9 @@ class MyFirstSkill(MycroftSkill):
     def handle_skill_study(self, message):
         
         # Give a welcome message to the user
-        self.speak("Welcome to your study session!" +
+        self.speak("Welcome to your study session, nice to see you!" +
                    " I will be your personal assistant and help you during your studies." +
+                   " Let’s start working together!" +
                    " Before we begin with the study session, we will first need to do some set up.")
 
         # Get the participant number from the user using the get_participant_number() function
