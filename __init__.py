@@ -148,10 +148,10 @@ class MyFirstSkill(MycroftSkill):
         # If you want the code to sleep for several minutes you should multiply the values with 60
         # Currently everythting is in second for debugging purposes
         for i in range(blocks):
-            time.sleep(25)
+            time.sleep(25*60)
             if i < blocks - 1:
                 self.speak("Alright, take a break for 5 minutes.")
-                time.sleep(5)
+                time.sleep(5*60)
                 self.speak_dialog("Break time is over. Get back to work now.")
             if i == blocks - 1:
                 break
