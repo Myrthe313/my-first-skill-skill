@@ -68,7 +68,7 @@ class MyFirstSkill(MycroftSkill):
             task2 = self.create_a_task('tasks.task2', "second")
             tasks.append(task2)
         elif another_task == "no":
-            self.speak("That is okay, we will now move on to setting up your pomodoro session.")
+            self.speak("That is okay, lets's move on!")
             return tasks
 
         # Get the third task the user wants to accomplish
@@ -81,7 +81,7 @@ class MyFirstSkill(MycroftSkill):
             tasks.append(task3)
             return tasks
         elif last_task == "no":
-            self.speak("That is okay, we will now move on to setting up your pomodoro session.")
+            self.speak("That is okay, let's move on!")
             return tasks
 
     def completion_of_tasks(self, tasks):
@@ -162,7 +162,7 @@ class MyFirstSkill(MycroftSkill):
     def handle_skill_study(self, message):
         
         # Give a welcome message to the user
-        self.speak("Welcome to your study session, nice to see you!" +
+        self.speak("Welcome to your study session, good to see you!" +
                    " I will be your personal assistant and help you during your studies." +
                    " Let’s start working together!" +
                    " Before we begin with the study session, we will first need to do some set up.")
