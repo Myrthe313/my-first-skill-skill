@@ -52,8 +52,8 @@ class MyFirstSkill(MycroftSkill):
 
     def get_tasks(self):
 
-        self.speak("In order to make this study session more productive " +
-                   "I would like to know the tasks you want to accomplish.")
+        self.speak("In order to keep you on your tasks and keep you productive" +
+                   "I need to know which tasks you want to accomplish.")
 
         tasks = []
         task1 = self.create_a_task('tasks.task1', "first")
@@ -62,26 +62,26 @@ class MyFirstSkill(MycroftSkill):
         # Get the second task the user wants to accomplish
         another_task = self.ask_yesno('tasks.another.task')
         while another_task != 'yes' and another_task != 'no':
-            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
+            self.speak("I did not understand that. Answer with yes or no.")
             another_task = self.ask_yesno('tasks.another.task')
         if another_task == "yes":
             task2 = self.create_a_task('tasks.task2', "second")
             tasks.append(task2)
         elif another_task == "no":
-            self.speak("Ok let's move on.")
+            self.speak("Okay let's move on, no time to lose!.")
             return tasks
 
         # Get the third task the user wants to accomplish
         last_task = self.ask_yesno('tasks.last.task')
         while last_task != 'yes' and last_task != 'no':
-            self.speak("I am sorry but I did not understand you. Please answer with yes or no.")
+            self.speak("I did not understand that. Answer with yes or no.")
             last_task = self.ask_yesno('tasks.last.task')
         if last_task == "yes":
             task3 = self.create_a_task('tasks.task3', "third")
             tasks.append(task3)
             return tasks
         elif last_task == "no":
-            self.speak("Ok let's move on.")
+            self.speak("Okay let's move on, no time to lose!.")
             return tasks
 
     def completion_of_tasks(self, tasks):
@@ -93,7 +93,7 @@ class MyFirstSkill(MycroftSkill):
             completed_task = self.ask_yesno('tasks.completed.task', data={"task": task,
                                                                           "task_number": task_number})
             while completed_task != 'yes' and completed_task != 'no':
-                self.speak("I am sorry but I did not understand you. Please respond with yes or no.")
+                self.speak("I did not understand that. Please respond with yes or no.")
                 self.ask_yesno('tasks.completed.task', data={"task": task,
                                                              "task_number": task_number})
             if completed_task == 'yes':
@@ -150,21 +150,21 @@ class MyFirstSkill(MycroftSkill):
         for i in range(blocks):
             time.sleep(25)
             if i < blocks - 1:
-                self.speak("It's time for a 5 minute break")
+                self.speak("Alright, take a break for 5 minutes.")
                 time.sleep(5)
-                self.speak_dialog("Break time is over. Get back to work.")
+                self.speak_dialog("Break time is over. Get back to work now.")
             if i == blocks - 1:
                 break
-        self.speak("You have finished your studying session." +
-                   " Let's see what tasks you were able to accomplish during your studying session.")
+        self.speak("Your studying session is finished." +
+                   "Let's see if you finished all your tasks during your studying session.")
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
         
         # Give a welcome message to the user
-        self.speak("Welcome to your study session!" +
-                   " I will be your personal assistant and help you during your studies." +
-                   " Before we begin with the study session, we will first need to do some set up.")
+        self.speak("Welcome to your study session." +
+                   " I will be your personal assistant and will make sure you will finish all your study tasks." +
+                   " Before we begin with the study session, we first have to do some set up.")
 
         # Get the participant number from the user using the get_participant_number() function
         self.participant_number = self.get_participant_number()
