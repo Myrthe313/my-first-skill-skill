@@ -71,7 +71,7 @@ class MyFirstSkill(MycroftSkill):
             task2 = self.create_a_task('tasks.task2', "second")
             tasks.append(task2)
         elif another_task == "no":
-            self.speak("That is okay, lets's move on!")
+            self.speak("That is okay, let's move on!")
             return tasks
 
         # Get the third task the user wants to accomplish
