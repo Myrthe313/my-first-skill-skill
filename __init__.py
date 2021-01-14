@@ -24,9 +24,7 @@ class MyFirstSkill(MycroftSkill):
         # Make sure the participant number from the user is correct
         correct_number = self.ask_yesno('skill.participant.number.confirmation',
                                         data={"participant_number": self.participant_number})
-
-        with open('log.txt', 'a') as f:
-            f.write(str(correct_number))
+        
             
         while correct_number != 'yes' and correct_number != 'no':
             self.speak("I am sorry but I did not understand you.")
@@ -151,10 +149,10 @@ class MyFirstSkill(MycroftSkill):
         # If you want the code to sleep for several minutes you should multiply the values with 60
         # Currently everythting is in second for debugging purposes
         for i in range(blocks):
-            time.sleep(25)
+            time.sleep(25*60)
             if i < blocks - 1:
                 self.speak("You have been busy for quite some time now. Let’s take a well deserved 5 minute break, enjoy!")
-                time.sleep(5)
+                time.sleep(5*60)
                 self.speak_dialog("Your break is over, hopefully you enjoyed and are now refreshed to start studying again.")
             if i == blocks - 1:
                 break
