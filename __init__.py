@@ -99,7 +99,7 @@ class MyFirstSkill(MycroftSkill):
             if completed_task == 'yes':
                 self.speak("Great job!")
             elif completed_task == 'no':
-                self.speak("I am very disappointed, please consider another studying session.")
+                self.speak("I am disappointed, please consider another studying session.")
 
     def get_blocks(self, block_names):
 
