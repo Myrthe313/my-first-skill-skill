@@ -29,7 +29,7 @@ class MyFirstSkill(MycroftSkill):
             self.speak("I am sorry but I did not understand you.")
             correct_number = self.ask_yesno('skill.participant.number.confirmation')
         if correct_number == 'no':
-            self.speak("I did not understand you. Try again.")
+            self.speak("Then I did not understand you correctly. Try again.")
             return self.get_participant_number()
         elif correct_number == 'yes':
             self.speak("Great, let's move on!")
