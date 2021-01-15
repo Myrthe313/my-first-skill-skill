@@ -97,7 +97,7 @@ class MyFirstSkill(MycroftSkill):
                 self.ask_yesno('tasks.completed.task', data={"task": task,
                                                              "task_number": task_number})
             if completed_task == 'yes':
-                self.speak("Great job!")
+                self.speak("Good job!")
             elif completed_task == 'no':
                 self.speak("I am disappointed, please consider another studying session.")
 
