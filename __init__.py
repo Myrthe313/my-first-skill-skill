@@ -53,7 +53,7 @@ class MyFirstSkill(MycroftSkill):
     def get_tasks(self):
 
         self.speak("In order to keep you on your tasks and keep you productive" +
-                   "I need to know which tasks you want to accomplish.")
+                   " I need to know which tasks you want to accomplish.")
 
         tasks = []
         task1 = self.create_a_task('tasks.task1', "first")
@@ -104,9 +104,9 @@ class MyFirstSkill(MycroftSkill):
     def get_blocks(self, block_names):
 
         self.speak("In this study session, we will make use of the pomodoro technique." +
-                   "During the session you will have study blocks of 25 minutes with " +
-                   "a break of 5 minutes between blocks." +
-                   "For this session, do you want to study for:")
+                   " During the session you will have study blocks of 25 minutes with " +
+                   " a break of 5 minutes between blocks." +
+                   " For this session, do you want to study for:")
         # To select the amount of blocks, a selection is used, to minimize pronunciation errors. 
         # This way, the answer is compared to the options and the option that matches the answer the most is chosen.
         # For example, if mycroft thinks a user says 'free brooks', he will pick three blocks as answer.
@@ -158,7 +158,7 @@ class MyFirstSkill(MycroftSkill):
             if i == blocks - 1:
                 break
         self.speak("Your studying session is finished." +
-                   "Let's see if you finished all your tasks during your studying session.")
+                   " Let's see if you finished all your tasks during your studying session.")
 
     @intent_handler('skill.study.intent')
     def handle_skill_study(self, message):
