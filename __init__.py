@@ -108,7 +108,10 @@ class MyFirstSkill(MycroftSkill):
                    " During the session you will have study blocks of 25 minutes with " +
                    "a break of 5 minutes between blocks." +
                    " For this session, do you want to study for:")
-        blocks = extract_number(self.ask_selection(block_names, 'blocks.selection'))
+        # To select the amount of blocks, a selection is used, to minimize pronunciation errors. 
+        # This way, the answer is compared to the options and the option that matches the answer the most is chosen.
+        # For example, if mycroft thinks a user says 'free brooks', he will pick three blocks as answer.
+        blocks = extract_number(self.ask_selection(block_names, 'blocks.selection')) #extract number returns an int
         while not blocks:
             self.speak("Sorry, I could not understand you." +
                        " Do you want to study for one block, two blocks or three blocks?")
