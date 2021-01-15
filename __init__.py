@@ -112,7 +112,7 @@ class MyFirstSkill(MycroftSkill):
         # For example, if mycroft thinks a user says 'free brooks', he will pick three blocks as answer.
         blocks = extract_number(self.ask_selection(block_names, 'blocks.selection')) # extract_number returns an int
         while not blocks:
-            self.speak("Sorry, I could not understand you.")
+            self.speak("I did not understand that.")
             blocks = extract_number(self.ask_selection(block_names, 'blocks.selection'))
 
         return blocks
