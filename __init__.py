@@ -4,7 +4,7 @@ class ILikeYou(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
 
-    @intent_handler(ILikeYou.intent)
+    @intent_handler('ILikeYou.intent')
     def ILikeYou(self, message):
 
         self.speak("I really like you too!")
